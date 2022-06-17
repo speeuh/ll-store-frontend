@@ -1,5 +1,28 @@
+import { BsFacebook, BsInstagram, BsTwitter } from 'react-icons/bs';
+
+import styles from './Footer.module.scss';
+
 export default function Footer() {
-    return (
-        <div> Footer </div>
-    )
+  return (
+    <footer className={styles.footer}>
+      <ul className={styles.footer__social_list}>
+        <li>
+          <a href='https://www.instagram.com/' target='_blank' rel="noreferrer">
+            <BsFacebook />
+          </a>
+        </li>
+        <li>
+          <a href='https://www.instagram.com/' target='_blank' rel="noreferrer">
+            <BsInstagram />
+          </a>
+        </li>
+        <li>
+          <a href='https://www.instagram.com/' target='_blank' rel="noreferrer">
+            <BsTwitter />
+          </a>
+        </li>
+      </ul>
+      <p className={styles.footer__copy_right}><span>llStore</span> &copy;2022</p>
+    </footer>
+  );
 }
