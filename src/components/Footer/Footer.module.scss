@@ -3,25 +3,35 @@
 .footer {
   background-color: rgb(38, 38, 38);
   color: rgb(170, 170, 170);
-  font-size: 12px;
   padding: 3em;
 
-  &__social_list a {
+  &__social_list {
     display: flex;
-    color: inherit;
     justify-content: center;
     list-style-type: none;
     font-size: 1.5em;
     margin: 0 1em;
-    &:hover {
+    li {
+      margin: 0 1em;
+    }
+    a {
+      color: inherit;
+      &:hover {
         color: rgb(64, 154, 60);
-        cursor: pointer;
+      }
     }
   }
 
   &__copy_right {
+    display: flex;
+    justify-content: center;
     font-family: $font;
-    font-weight: 700;
-    color: #FFF;
+    font-size: 16px;
+    justify-content: center;
+    margin-top: 2em;
+    span {
+      font-weight: $fw700;
+      color: $green;
+    }
   }
 }
