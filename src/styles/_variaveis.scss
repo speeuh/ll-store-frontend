@@ -1,11 +1,18 @@
 // FONTE
 $font: 'Bitter', serif;
-$fw300: 300;
-$fw400: 400;
-$fw700: 700;
+$subText: 14px;
+$titleSize: 40px;
+$normal: 300;
+$subtitle: 400;
+$title: 700;
 
 // CORES
 $green: rgb(64, 154, 60);
 $grey: rgb(170, 170, 170);
 $dark: rgb(38, 38, 38);
 
+// PADDING
+$padding-horizontal-mobile: 100px;
+$padding-horizontal-sm: 150px;
+$padding-horizontal-md: 200px;
+$padding-horizontal: 250px;
