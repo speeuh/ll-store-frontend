@@ -1,33 +1,35 @@
-@import "styles/_variaveis.scss";
+@import 'styles/_variaveis.scss';
 
 .menu {
-    font-family: $font;
-    font-size: 20px;
-    font-weight: 500;
-    box-shadow: rgb(74 74 74 / 40%) 0px 3px 14px 0px;
-    padding-left: 10px;
-    display: flex!important;
+  font-family: $font;
+  width: 100%;
+  font-size: 20px;
+  font-weight: 500;
+  box-shadow: rgb(74 74 74 / 40%) 0px 3px 14px 0px;
+  padding-left: 10px;
+  display: flex;
+  height: 2.5em;
 
+  &__search {
+    display: flex;
+    &_button {
+      margin-left: 0.5em;
+    }
+  }
 
-
-    &__search {
-        display: flex;
-        
+  &__items {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    :hover {
+      color: $green;
     }
 
-    &__items {
-        display: flex!important;
-        justify-content: flex-end!important;
-        &:hover {
-            color: $green !important;
-        }
-    }
-
+  }
 }
 
-
-
 .teste {
-    display: flex!important;
-    justify-content: space-between!important;
+  display: flex !important;
+  justify-content: space-between !important;
+  width: 100%;
 }

@@ -22,21 +22,20 @@ export default function Header() {
           <img src={logoLL} />
         </Navbar.Brand>
         </div>
-        <Navbar.Toggle aria-controls='navbarScroll' />
         <Navbar.Collapse className={styles.teste} >
           <Nav
-            style={{ maxHeight: "100px" }}
-            navbarScroll
+            className={styles.menu}
           >
-              <Form  className={styles.menu__search}>
+              <Form className={styles.menu__search}>
                 <FormControl
                   type='search'
                   placeholder='Search'
                   aria-label='Search'
                 />
-                <Button variant='outline-success'>Search</Button>
+                <Button className={styles.menu__search_button} variant='outline-success'>Search</Button>
               </Form>
-            <div  className={styles.menu__items}>
+
+            <Container className={styles.menu__items}>
             <Nav.Link href='#action1'>Home</Nav.Link>
             <Nav.Link href='#action2'>All Products</Nav.Link>
             <Nav.Link href='#'> About Us </Nav.Link>
@@ -47,7 +46,8 @@ export default function Header() {
               <NavDropdown.Divider />
               <NavDropdown.Item href='#action5'>Daily Basics</NavDropdown.Item>
             </NavDropdown>
-            </div>
+            </Container>
+
           </Nav>
         </Navbar.Collapse>
       </Navbar>
