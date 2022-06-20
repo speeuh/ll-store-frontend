@@ -8,6 +8,7 @@ import { BsFacebook, BsGoogle, BsLinkedin } from 'react-icons/bs';
 import classNames from 'classnames';
 
 export default function Login() {
+  const [email, setEmail] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
@@ -26,6 +27,7 @@ export default function Login() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
+    console.log('Email: ' + email);
     console.log('Username: ' + userName);
     console.log('Password: ' + password);
   }
@@ -63,8 +65,8 @@ export default function Login() {
               placeholder='Email'
               autoFocus
               type='email'
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </FormGroup>
 
@@ -83,7 +85,7 @@ export default function Login() {
             <FormControl
               bsPrefix={styles.login__input}
               placeholder='Password'
-              type='text'
+              type='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -138,7 +140,7 @@ export default function Login() {
             <FormControl
               bsPrefix={styles.login__input}
               placeholder='Password'
-              type='text'
+              type='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
