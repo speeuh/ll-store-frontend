@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { FormControl, FormGroup } from 'react-bootstrap';
@@ -6,6 +6,8 @@ import { FormControl, FormGroup } from 'react-bootstrap';
 import styles from './Login.module.scss';
 import { BsFacebook, BsGoogle, BsLinkedin } from 'react-icons/bs';
 import classNames from 'classnames';
+import http from 'http';
+import axios from 'axios';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -25,11 +27,21 @@ export default function Login() {
     return userName.length > 0 && password.length > 0;
   }
 
-  function handleSubmit(event: any) {
+  function handleSubmitSignUp(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log('Email: ' + email);
-    console.log('Username: ' + userName);
-    console.log('Password: ' + password);
+
+    axios
+      .post('http://localhost:8080/users', {
+        userName: userName,
+        email: email,
+        password: password,
+      })
+      .then(() => {
+        alert('Usuário criado com sucesso');
+        setEmail('');
+        setUserName('');
+        setPassword('');
+      })
   }
 
   return (
@@ -39,10 +51,10 @@ export default function Login() {
           [styles.login__form_container]: true,
           [styles.login__sign_up_container]: true,
           [`${styles.login__right_panel_active_sign_in_container} ${styles.login__right_panel_active}`]:
-            isContainerActive
+            isContainerActive,
         })}
       >
-        <Form className={styles.login__form} onSubmit={handleSubmit}>
+        <Form className={styles.login__form} onSubmit={handleSubmitSignUp}>
           <h1 className={styles.login__title}> Create Account </h1>
 
           <div className={styles.login__social_container}>
@@ -105,10 +117,10 @@ export default function Login() {
           [styles.login__form_container]: true,
           [styles.login__sign_in_container]: true,
           [`${styles.login__right_panel_active_sign_in_container}`]:
-          isContainerActive
+            isContainerActive,
         })}
       >
-        <Form className={styles.login__form} onSubmit={handleSubmit}>
+        <Form className={styles.login__form} onSubmit={handleSubmitSignUp}>
           <h1 className={styles.login__title}> Sign in </h1>
 
           <div className={styles.login__social_container}>
@@ -179,7 +191,7 @@ export default function Login() {
                 isContainerActive,
             })}
           >
-            <h1 className={styles.login__title} > Welcome Back! </h1>
+            <h1 className={styles.login__title}> Welcome Back! </h1>
             <p>
               To keep connected with us please login with your personal info
             </p>
@@ -199,7 +211,7 @@ export default function Login() {
               [styles.login__overlay_panel]: true,
               [styles.login__overlay_right]: true,
               [styles.login__right_panel_active_overlay_right]:
-                isContainerActive
+                isContainerActive,
             })}
           >
             <h1 className={styles.login__title}> Hello, Friend! </h1>
