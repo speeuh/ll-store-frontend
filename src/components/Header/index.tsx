@@ -12,41 +12,101 @@ import logoLL from "assets/logo.png";
 import styles from "./Header.module.scss";
 
 import stylesTema from "styles/Tema.module.scss";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Header() {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  let getProducts = {};
+
+  (async () => {
+    getProducts = await fetch("http://localhost:8080/products", {method: 'HEAD'})
+      .then((response) => {
+        return response.json();
+      })
+      .then((r) => {
+        return r;
+      })
+      .catch((err) => {
+        // Do something for an error here
+      });
+    console.log("Exemplo com async/await", getProducts);
+  })();
+
   return (
     <>
       <Navbar bsPrefix={styles.menu} expand='lg'>
         <Navbar.Brand href='/'>
           <img src={logoLL} />
         </Navbar.Brand>
-        <Navbar.Collapse className={styles.teste} >
-          <Nav
-            className={styles.menu}>
+        <Navbar.Collapse className={styles.teste}>
+          <Nav className={styles.menu}>
             <Form className={styles.menu__search}>
               <FormControl
-                type='search'
+                type='text'
                 placeholder='Search'
                 aria-label='Search'
+                onChange={(event) => {
+                  setSearchTerm(event.target.value);
+                }}
               />
-              <Button className={styles.menu__search_button} variant='outline-success'> Search </Button>
+
+              <Button
+                className={styles.menu__search_button}
+                variant='outline-success'
+              >
+                {" "}
+                Search{" "}
+              </Button>
             </Form>
 
             <Container className={styles.menu__items}>
-
-              <Nav.Link className={styles.menu__items} href='/'> Home </Nav.Link>
-              <Nav.Link className={styles.menu__items} href='/products'> All Products </Nav.Link>
-              <Nav.Link className={styles.menu__items} href='/aboutus'> About Us </Nav.Link>
+              <Nav.Link className={styles.menu__items} href='/'>
+                {" "}
+                Home{" "}
+              </Nav.Link>
+              <Nav.Link className={styles.menu__items} href='/products'>
+                {" "}
+                All Products{" "}
+              </Nav.Link>
+              <Nav.Link className={styles.menu__items} href='/aboutus'>
+                {" "}
+                About Us{" "}
+              </Nav.Link>
               <NavDropdown bsPrefix={styles.menu__items} title='Sections'>
-                <NavDropdown.Item className={styles.menu__items} href='/groceries'> Groceries </NavDropdown.Item>
-                <NavDropdown.Item className={styles.menu__items} href='/clothing'> Clothing </NavDropdown.Item>
-                <NavDropdown.Item className={styles.menu__items} href='/electronics'> Electronics </NavDropdown.Item>
+                <NavDropdown.Item
+                  className={styles.menu__items}
+                  href='/groceries'
+                >
+                  {" "}
+                  Groceries{" "}
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  className={styles.menu__items}
+                  href='/clothing'
+                >
+                  {" "}
+                  Clothing{" "}
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  className={styles.menu__items}
+                  href='/electronics'
+                >
+                  {" "}
+                  Electronics{" "}
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item className={styles.menu__items} href='/daily'> Daily Basics </NavDropdown.Item>
+                <NavDropdown.Item className={styles.menu__items} href='/daily'>
+                  {" "}
+                  Daily Basics{" "}
+                </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link className={styles.menu__items} href='/login'> Login/SignUp </Nav.Link>
+              <Nav.Link className={styles.menu__items} href='/login'>
+                {" "}
+                Login/SignUp{" "}
+              </Nav.Link>
             </Container>
-
           </Nav>
         </Navbar.Collapse>
       </Navbar>
