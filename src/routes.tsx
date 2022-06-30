@@ -10,6 +10,9 @@ import Header from 'components/Header';
 import Home from 'pages/Home';
 import Login from 'pages/Login';
 import { AuthProvider, AuthContext } from 'contexts/auth';
+import MainPageAdmin from 'pages/admin/MainPageAdmin';
+import ProductList from 'pages/admin/Product/List';
+import ProductForm from 'pages/admin/Product/Form';
 
 export default function AppRouter() {
   const Private = ({ children }: any) => {
@@ -18,7 +21,7 @@ export default function AppRouter() {
     if (loading) {
       return <div className='loading'>Loading...</div>;
     }
-    
+
     if (!authenticated) {
       return <Navigate to='/login' />;
     }
@@ -32,17 +35,16 @@ export default function AppRouter() {
         <AuthProvider>
           <Routes>
             <Route path='/' element={<Header />}>
-              <Route
-                index
-                element={
-                  <Private>
-                    <Home />
-                  </Private>
-                }
-              />
+              <Route index element={<Home />} />
               <Route path='products' element={<Login />}></Route>
               <Route path='aboutus' element={<Login />}></Route>
               <Route path='login' element={<Login />}></Route>
+            </Route>
+
+            <Route path='/admin' element={<MainPageAdmin />}>
+              <Route path='products' element={<ProductList />} />
+              <Route path='products/new' element={<ProductForm />} />
+              <Route path='products/:id' element={<ProductForm />} />
             </Route>
           </Routes>
         </AuthProvider>

@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import { BsFacebook, BsInstagram, BsTwitter } from 'react-icons/bs';
 
 import styles from './Footer.module.scss';

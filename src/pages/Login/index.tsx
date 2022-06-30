@@ -173,7 +173,6 @@ export default function Login() {
               <Button
                 bsPrefix={styles.login__button}
                 type='submit'
-                disabled={!validateForm()}
               >
                 Sign In
               </Button>
