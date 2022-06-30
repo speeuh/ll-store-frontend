@@ -8,6 +8,7 @@ import {
   TableRow,
 } from '@mui/material';
 import IProduct from 'interfaces/IProduct';
+import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -52,33 +53,33 @@ export default function ProductList() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {products.map((product) => (
-            <TableRow key={product.id}>
-              <TableCell>{product.name}</TableCell>
-              <TableCell>{product.section.name}</TableCell>
-              <TableCell>{product.brand.name}</TableCell>
-              <TableCell>{product.description}</TableCell>
-              <TableCell>{product.value}</TableCell>
-              <TableCell>{product.expiry}</TableCell>
-              <TableCell>
-                <Button
-                  variant='outlined'
-                  color='info'
-                >
-                  <Link to={`/admin/products/${product.id}`}>Edit</Link>
-                </Button>
-              </TableCell>
-              <TableCell>
-                <Button
-                  variant='outlined'
-                  color='error'
-                  onClick={() => deleteProduct(product)}
-                >
-                  Delete
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
+          {products.map((product) => {
+            const expiryFormated = moment(product.expiry).format('DD-MM-yyyy')
+            return (
+              <TableRow key={product.id}>
+                <TableCell>{product.name}</TableCell>
+                <TableCell>{product.section.name}</TableCell>
+                <TableCell>{product.brand.name}</TableCell>
+                <TableCell>{product.description}</TableCell>
+                <TableCell>{product.value}</TableCell>
+                <TableCell>{expiryFormated}</TableCell>
+                <TableCell>
+                  <Button variant='outlined' color='info'>
+                    <Link to={`/admin/products/${product.id}`}>Edit</Link>
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    variant='outlined'
+                    color='error'
+                    onClick={() => deleteProduct(product)}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>
