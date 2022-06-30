@@ -15,24 +15,18 @@ import stylesTema from "styles/Tema.module.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+
 export default function Header() {
-  const [searchTerm, setSearchTerm] = useState("");
 
-  let getProducts = {};
+  const [products, setProducts] = useState<Record<any, any>>();
 
-  (async () => {
-    getProducts = await fetch("http://localhost:8080/products", {method: 'HEAD'})
-      .then((response) => {
-        return response.json();
-      })
-      .then((r) => {
-        return r;
-      })
-      .catch((err) => {
-        // Do something for an error here
-      });
-    console.log("Exemplo com async/await", getProducts);
-  })();
+  useEffect(() => {
+    const teste = async () => {
+      const { data } = await axios.get('http://localhost:8080/products');
+      setProducts(data);
+    };
+    teste();
+  }, []);
 
   return (
     <>
@@ -46,12 +40,7 @@ export default function Header() {
               <FormControl
                 type='text'
                 placeholder='Search'
-                aria-label='Search'
-                onChange={(event) => {
-                  setSearchTerm(event.target.value);
-                }}
-              />
-
+                aria-label='Search'/>   
               <Button
                 className={styles.menu__search_button}
                 variant='outline-success'
@@ -66,7 +55,7 @@ export default function Header() {
                 {" "}
                 Home{" "}
               </Nav.Link>
-              <Nav.Link className={styles.menu__items} href='/products'>
+              <Nav.Link className={styles.menu__items} href='/AllProducts'>
                 {" "}
                 All Products{" "}
               </Nav.Link>
