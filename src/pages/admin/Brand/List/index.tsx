@@ -8,7 +8,6 @@ import {
   TableRow,
 } from '@mui/material';
 import IProduct from 'interfaces/IProduct';
-import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -17,39 +16,35 @@ import { api } from 'services';
 import styles from '../../MainPageAdmin.module.scss';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function ProductList() {
-  const [products, setProducts] = useState<Record<any, any>>([]);
+export default function BrandList() {
+  const [brands, setBrands] = useState<Record<any, any>>([]);
   const token = localStorage.getItem('user');
 
   useEffect(() => {
-    api.get('/products/list').then((response) => setProducts(response.data));
+    api.get('/brands/list').then((response) => setBrands(response.data));
   }, []);
 
-  const deleteProduct = async (deleteProduct: IProduct) => {
+  const deleteBrand = async (deleteBrand: IProduct) => {
     await api
-      .delete(`/products/${deleteProduct.id}`, {
+      .delete(`/brands/${deleteBrand.id}`, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
       })
       .then(() => {
-        const productsList = products.filter(
-          (product) => product.id !== deleteProduct.id
+        const brandsList = brands.filter(
+          (brand) => brand.id !== deleteBrand.id
         );
-        setProducts([...productsList]);
+        setBrands([...brandsList]);
       });
   };
 
   return (
     <TableContainer component={Paper}>
       <div className={styles.links}>
-        <Link to={'/admin/products/new'}>
-          <Button
-            className={styles.links__button}
-            variant='contained'
-            color='success'
-          >
-            New Product
+        <Link to={'/admin/brands/new'}>
+          <Button className={styles.links__button} variant='contained' color='success'>
+            New Brand
           </Button>
         </Link>
       </div>
@@ -58,28 +53,17 @@ export default function ProductList() {
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell>Section</TableCell>
-            <TableCell>Brand</TableCell>
-            <TableCell>Description</TableCell>
-            <TableCell>Value</TableCell>
-            <TableCell>Expiry</TableCell>
             <TableCell>Edit</TableCell>
             <TableCell>Delete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {products.map((product) => {
-            const expiryFormated = moment(product.expiry).format('DD-MM-yyyy');
+          {brands.map((brand) => {
             return (
-              <TableRow key={product.id}>
-                <TableCell>{product.name}</TableCell>
-                <TableCell>{product.section.name}</TableCell>
-                <TableCell>{product.brand.name}</TableCell>
-                <TableCell>{product.description}</TableCell>
-                <TableCell>{product.value}</TableCell>
-                <TableCell>{expiryFormated}</TableCell>
+              <TableRow key={brand.id}>
+                <TableCell>{brand.name}</TableCell>
                 <TableCell className={styles.links}>
-                  <Link to={`/admin/products/${product.id}`}>
+                  <Link to={`/admin/brands/${brand.id}`}>
                     <Button variant='contained' color='info'>
                       Edit
                     </Button>
@@ -89,7 +73,7 @@ export default function ProductList() {
                   <Button
                     variant='contained'
                     color='error'
-                    onClick={() => deleteProduct(product)}
+                    onClick={() => deleteBrand(brand)}
                     startIcon={<DeleteIcon />}
                   >
                     Delete

@@ -1,43 +1,34 @@
-import {
-    AppBar,
-    Box,
-    Button,
-    Link,
-    Paper,
-    Toolbar,
-    Typography,
-    Container,
-  } from '@mui/material';
-  
-  import { Link as RouterLink, Outlet } from 'react-router-dom';
-  
-  export default function MainPageAdmin() {
-    return (
-      <>
-        <AppBar position='static'>
-          <Container maxWidth='xl'>
-            <Toolbar>
-              <Typography variant='h6'>Admin</Typography>
-              <Box sx={{ display: 'flex', flexGrow: 1 }}>
-                <Link component={RouterLink} to='/admin/products'>
-                  <Button sx={{ my: 2, color: 'white' }}>Products</Button>
-                </Link>
-                <Link component={RouterLink} to='/admin/products/new'>
-                  <Button sx={{ my: 2, color: 'white' }}>New Product</Button>
-                </Link>
-              </Box>
-            </Toolbar>
-          </Container>
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+
+import styles from './MainPageAdmin.module.scss';
+import TemporaryDrawer from 'components/Header/TemporaryDrawer';
+import { Container, Paper } from '@mui/material';
+import { Outlet } from 'react-router-dom';
+
+export default function MenuAppBar() {
+  return (
+    <>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position='static' className={styles.app}>
+          <Toolbar>
+            <TemporaryDrawer />
+            <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+              Admin
+            </Typography>
+          </Toolbar>
         </AppBar>
-  
-        <Box>
-          <Container maxWidth='lg' sx={{ mt: 1 }}>
-            <Paper sx={{ p: 2 }}>
-              <Outlet />
-            </Paper>
-          </Container>
-        </Box>
-      </>
-    );
-  }
-  
+      </Box>
+
+      <Box>
+        <Container maxWidth='lg' sx={{ mt: 1 }}>
+          <Paper sx={{ p: 2 }}>
+            <Outlet />
+          </Paper>
+        </Container>
+      </Box>
+    </>
+  );
+}

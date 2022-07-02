@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { api } from 'services';
 import { useNavigate } from 'react-router-dom';
 
-import styles from './FormProducts.module.scss';
+import styles from '../../MainPageAdmin.module.scss';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 export default function ProductForm() {
   const [name, setName] = useState('');
@@ -106,18 +107,21 @@ export default function ProductForm() {
       },
     });
 
-    navigate('/admin/products');
+    navigate('/admin/products/list');
   }
+
+  const backOnePage = () => {
+    navigate(-1);
+  };
 
   return (
     <>
       <div>
-        <Modal.Header closeButton>
-          <Modal.Title>Create new product</Modal.Title>
-        </Modal.Header>
-
-        <Form onSubmit={handleNewProduct}>
-          <Form.Group className='mb-3' controlId='formBasicEmail'>
+        <Button variant='outlined' onClick={backOnePage}>
+          <ArrowBackIosIcon />
+        </Button>
+        <Form className={styles.form} onSubmit={handleNewProduct}>
+          <Form.Group className='mb-3' controlId='formBasicProductName'>
             <Form.Label> Product Name </Form.Label>
             <Form.Control
               type='text'
@@ -127,7 +131,7 @@ export default function ProductForm() {
             />
           </Form.Group>
 
-          <Form.Group className='mb-3' controlId='formBasicPassword'>
+          <Form.Group className='mb-3' controlId='formBasicProductSection'>
             <Form.Label> Section </Form.Label>
             <Form.Select onChange={handleSection}>
               <option> Select a Section </option>
@@ -143,7 +147,7 @@ export default function ProductForm() {
             </Form.Select>
           </Form.Group>
 
-          <Form.Group className='mb-3' controlId='formBasicPassword'>
+          <Form.Group className='mb-3' controlId='formBasicProductBrand'>
             <Form.Label> Brand </Form.Label>
             <Form.Select onChange={handleBrand}>
               <option> Select a Brand </option>
@@ -159,7 +163,7 @@ export default function ProductForm() {
             </Form.Select>
           </Form.Group>
 
-          <Form.Group className='mb-3' controlId='formBasicPassword'>
+          <Form.Group className='mb-3' controlId='formBasicProductDescription'>
             <Form.Label> Description </Form.Label>
             <Form.Control
               type='text'
@@ -169,7 +173,7 @@ export default function ProductForm() {
             />
           </Form.Group>
 
-          <Form.Group className='mb-3' controlId='formBasicPassword'>
+          <Form.Group className='mb-3' controlId='formBasicProductValue'>
             <Form.Label> Value </Form.Label>
             <Form.Control
               type='number'
@@ -179,7 +183,7 @@ export default function ProductForm() {
             />
           </Form.Group>
 
-          <Form.Group className='mb-3' controlId='formBasicPassword'>
+          <Form.Group className='mb-3' controlId='formBasicProductExpiry'>
             <Form.Label> Expiry </Form.Label>
             <Form.Control
               type='date'
@@ -190,7 +194,7 @@ export default function ProductForm() {
             />
           </Form.Group>
 
-          <Form.Group className='mb-3' controlId='formBasicPassword'>
+          <Form.Group className='mb-3' controlId='formBasicProductImage'>
             <Form.Label> Image </Form.Label>
             <Form.Control
               type='file'
@@ -200,9 +204,15 @@ export default function ProductForm() {
             />
           </Form.Group>
 
-          <Button variant='primary' type='submit'>
-            Create
-          </Button>
+          <Form.Group className='mb-3' controlId='formBasicProductSubmit'>
+            <Button
+              bsPrefix={styles.form__create}
+              variant='primary'
+              type='submit'
+            >
+              Create
+            </Button>
+          </Form.Group>
         </Form>
       </div>
     </>

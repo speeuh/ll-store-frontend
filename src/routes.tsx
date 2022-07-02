@@ -13,6 +13,10 @@ import { AuthProvider, AuthContext } from 'contexts/auth';
 import MainPageAdmin from 'pages/admin/MainPageAdmin';
 import ProductList from 'pages/admin/Product/List';
 import ProductForm from 'pages/admin/Product/Form';
+import SectionForm from 'pages/admin/Section/Form';
+import SectionList from 'pages/admin/Section/List';
+import BrandList from 'pages/admin/Brand/List';
+import BrandForm from 'pages/admin/Brand/Form';
 
 export default function AppRouter() {
   const Private = ({ children }: any) => {
@@ -42,9 +46,17 @@ export default function AppRouter() {
             </Route>
 
             <Route path='/admin' element={<MainPageAdmin />}>
-              <Route path='products' element={<ProductList />} />
+              <Route path='products/list' element={<ProductList />} />
               <Route path='products/new' element={<ProductForm />} />
               <Route path='products/:id' element={<ProductForm />} />
+
+              <Route path='sections/list' element={<SectionList />} />
+              <Route path='sections/new' element={<SectionForm />} />
+              <Route path='sections/:id' element={<SectionForm />} />
+
+              <Route path='brands/list' element={<BrandList />} />
+              <Route path='brands/new' element={<BrandForm />} />
+              <Route path='brands/:id' element={<BrandForm />} />
             </Route>
           </Routes>
         </AuthProvider>

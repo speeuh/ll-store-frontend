@@ -1,0 +1,19 @@
+.drawer {    
+    a {
+        text-decoration: none;
+    }
+
+    &__list {
+        display: flex;
+        color: black;
+        align-items: center;
+
+        &_text {
+            margin-left: 10px;
+        }
+    }
+}
+
+.icon {
+    color: #FFF !important;
+}
