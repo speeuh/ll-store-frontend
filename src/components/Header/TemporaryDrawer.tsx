@@ -44,7 +44,7 @@ export default function TemporaryDrawer() {
       <List>
         <Divider />
         {SidebarData.map((item, index) => (
-          <ListItem key={index}>
+          <ListItem disablePadding key={index}>
             <ListItemButton className={styles.drawer}>
               <Link href={item.path}>
                 <div className={styles.drawer__list}>

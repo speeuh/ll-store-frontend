@@ -41,6 +41,7 @@ export default function BrandList() {
 
   return (
     <TableContainer component={Paper}>
+      <h1 className={styles.title}> Brands List </h1>
       <div className={styles.links}>
         <Link to={'/admin/brands/new'}>
           <Button className={styles.links__button} variant='contained' color='success'>

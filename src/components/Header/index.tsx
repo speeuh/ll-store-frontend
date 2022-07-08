@@ -55,7 +55,7 @@ export default function Header() {
               <NavDropdown title='Account'>
                 {authenticated === true ? (
                   <>
-                    <Nav.Link href='/admin'> Admin </Nav.Link>
+                    <Nav.Link href='/admin/products/list'> Admin </Nav.Link>
                     <Button bsPrefix={styles.menu__items_button} onClick={handleLogout}> Logout </Button>
                   </> 
                 )

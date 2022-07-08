@@ -1,19 +1,21 @@
-.drawer {    
-    a {
-        text-decoration: none;
-    }
+.drawer {
+  a {
+    text-decoration: none;
+    padding: 8px 16px;
+    width: 100%;
+  }
 
-    &__list {
-        display: flex;
-        color: black;
-        align-items: center;
+  &__list {
+    display: flex;
+    color: black;
+    align-items: center;
 
-        &_text {
-            margin-left: 10px;
-        }
+    &_text {
+      margin-left: 10px;
     }
+  }
 }
 
 .icon {
-    color: #FFF !important;
+  color: #fff !important;
 }

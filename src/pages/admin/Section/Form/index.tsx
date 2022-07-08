@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { api } from 'services';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import styles from '../../MainPageAdmin.module.scss';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -13,6 +13,14 @@ export default function SectionForm() {
 
   const navigate = useNavigate();
 
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (id) {
+      api.get(`/sections/${id}`).then((response) => setName(response.data.name));
+    }
+  }, [id]);
+
   async function handleNewSection(e) {
     e.preventDefault();
 
@@ -20,11 +28,21 @@ export default function SectionForm() {
       name,
     };
 
-    await api.post('/sections', data, {
-      headers: {
-        Authorization: 'Bearer ' + token,
-      },
-    });
+    if (id) {
+      await api.patch(`/sections/${id}`, data, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      });
+    } else {
+      await api.post('/sections', data, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      });
+    }
+
+
 
     navigate('/admin/sections/list');
   }
@@ -56,7 +74,7 @@ export default function SectionForm() {
               variant='primary'
               type='submit'
             >
-              Create
+              Save
             </Button>
           </Form.Group>
         </Form>

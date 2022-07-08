@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { api } from 'services';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import styles from '../../MainPageAdmin.module.scss';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -13,6 +13,14 @@ export default function BrandForm() {
 
   const navigate = useNavigate();
 
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (id) {
+      api.get(`/brands/${id}`).then((response) => setName(response.data.name));
+    }
+  }, [id]);
+
   async function handleNewBrand(e) {
     e.preventDefault();
 
@@ -20,11 +28,19 @@ export default function BrandForm() {
       name,
     };
 
-    await api.post('/brands', data, {
-      headers: {
-        Authorization: 'Bearer ' + token,
-      },
-    });
+    if (id) {
+      await api.patch(`/brands/${id}`, data, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      });
+    } else {
+      await api.post('/brands', data, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      });
+    }
 
     navigate('/admin/brands/list');
   }
@@ -37,7 +53,7 @@ export default function BrandForm() {
     <>
       <div>
         <Button variant='outlined' onClick={backOnePage}>
-            <ArrowBackIosIcon />
+          <ArrowBackIosIcon />
         </Button>
         <Form className={styles.form} onSubmit={handleNewBrand}>
           <Form.Group className='mb-3' controlId='formBasicBrandName'>
@@ -56,7 +72,7 @@ export default function BrandForm() {
               variant='primary'
               type='submit'
             >
-              Create
+              Save
             </Button>
           </Form.Group>
         </Form>

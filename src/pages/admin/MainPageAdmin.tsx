@@ -24,7 +24,7 @@ export default function MenuAppBar() {
 
       <Box>
         <Container maxWidth='lg' sx={{ mt: 1 }}>
-          <Paper sx={{ p: 2 }}>
+          <Paper sx={{ p: 2, }}>
             <Outlet />
           </Paper>
         </Container>

@@ -42,6 +42,7 @@ export default function ProductList() {
 
   return (
     <TableContainer component={Paper}>
+      <h1 className={styles.title}> Products List </h1>
       <div className={styles.links}>
         <Link to={'/admin/products/new'}>
           <Button

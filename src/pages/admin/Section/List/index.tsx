@@ -41,6 +41,7 @@ export default function SectionList() {
 
   return (
     <TableContainer component={Paper}>
+      <h1 className={styles.title}> Sections List </h1>
       <div className={styles.links}>
         <Link to={'/admin/sections/new'}>
           <Button
