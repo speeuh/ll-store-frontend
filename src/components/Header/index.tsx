@@ -43,7 +43,7 @@ export default function Header() {
 
             <Container className={styles.menu__items}>
               <Nav.Link href='/'> Home </Nav.Link>
-              <Nav.Link href='/products'> All Products </Nav.Link>
+              <Nav.Link href='/allproducts'> All Products </Nav.Link>
               <Nav.Link href='/aboutus'> About Us </Nav.Link>
               <NavDropdown title='Sections'>
                 <Nav.Link href='/groceries'> Groceries </Nav.Link>

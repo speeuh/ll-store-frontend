@@ -13,10 +13,14 @@ import { AuthProvider, AuthContext } from 'contexts/auth';
 import MainPageAdmin from 'pages/admin/MainPageAdmin';
 import ProductList from 'pages/admin/Product/List';
 import ProductForm from 'pages/admin/Product/Form';
+<<<<<<< Updated upstream
 import SectionForm from 'pages/admin/Section/Form';
 import SectionList from 'pages/admin/Section/List';
 import BrandList from 'pages/admin/Brand/List';
 import BrandForm from 'pages/admin/Brand/Form';
+=======
+import AllProducts from 'pages/AllProducts';
+>>>>>>> Stashed changes
 
 export default function AppRouter() {
   const Private = ({ children }: any) => {
@@ -40,7 +44,7 @@ export default function AppRouter() {
           <Routes>
             <Route path='/' element={<Header />}>
               <Route index element={<Home />} />
-              <Route path='products' element={<Login />}></Route>
+              <Route path='allproducts' element={<AllProducts />} /> 
               <Route path='aboutus' element={<Login />}></Route>
               <Route path='login' element={<Login />}></Route>
             </Route>
