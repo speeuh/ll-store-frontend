@@ -1,21 +1,21 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import ProductsCard from "./ProductsCard";
-import Button from "./Buttons";
-import styles from "./ProductsCard/ProductsCard.module.scss";
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import Button from './Buttons';
+import styles from './ProductsCard/ProductsCard.module.scss';
 
 export default function AllProducts() {
   const [filteredSection, setFilteredSection] = useState<string | null>(null);
   const [products, setProducts] = useState<Record<any, any>>([]);
   const [productSectionId, setProductSectionId] = useState<string | null>(null);
+  const [filteredProducts, setFilteredProducts] = useState<Record<any, any>>([]);
 
   useEffect(() => {
     const teste = async () => {
-      const { data } = await axios.get("http://localhost:8080/products/list");
+      const { data } = await axios.get('http://localhost:8080/products/list');
       setProducts(data);
+      setFilteredProducts(data);
     };
     teste();
-    
   }, []);
 
   useEffect(() => {
@@ -24,21 +24,21 @@ export default function AllProducts() {
         if (filteredSection === productSectionId) {
           return;
         } else {
+          setFilteredProducts(products);
           const filteredProduct =
             products !== null && products !== undefined
-              ? products.filter((product) =>
-                  product.section.id.includes(filteredSection),
+              ? products.filter(
+                  (product) => product.section.id.includes(filteredSection),
                   setProductSectionId(filteredSection)
-                  
                 )
               : null;
-          setProducts(filteredProduct);
+          setFilteredProducts(filteredProduct);
         }
       }
-    }; 
+    };
+
     checkSectionId();
   }, [filteredSection]);
-  console.log(products);
 
   return (
     <div>
@@ -47,9 +47,9 @@ export default function AllProducts() {
         setFilteredSection={setFilteredSection}
       />
       <div className={styles.container}>
-        {products !== undefined &&
-          products !== null &&
-          products.map((product) => {
+        {filteredProducts !== undefined &&
+          filteredProducts !== null &&
+          filteredProducts.map((product) => {
             return (
               <>
                 <div key={product.id}>
